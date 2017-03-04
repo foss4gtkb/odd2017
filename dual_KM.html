@@ -23,23 +23,70 @@
         var center1 = [31.271802,130.992565];
         var center2 = [42.045213,140.595818];
 
-        var layer1 = L.tileLayer('http://giscience.sakura.ne.jp/tileodd/T_KIMO/{z}/{x}/{y}.png',{attribution: 'Contains modified Copernicus Sentinel data 2017'});
+        var layer1 = L.tileLayer(
+            'http://giscience.sakura.ne.jp/tileodd/T_KIMO/{z}/{x}/{y}.png',{
+                attribution: 'Contains modified Copernicus Sentinel data 2017',
+                opacity:0.8
+            });
 
-        var layer2 = L.tileLayer('http://giscience.sakura.ne.jp/tileodd/T_MORI/{z}/{x}/{y}.png',{attribution: 'Contains modified Copernicus Sentinel data 2017'});
+        var osm1 = L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                id: 'examples.map-i875mjb7',
+                opacity:0.99
+            });
+
+        var layer2 = L.tileLayer(
+            'http://giscience.sakura.ne.jp/tileodd/T_MORI/{z}/{x}/{y}.png',{
+                attribution: 'Contains modified Copernicus Sentinel data 2017',
+                opacity:0.8
+            });
+
+        var osm2 = L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+                id: 'examples.map-i875mjb7',
+                opacity:0.99
+            });
 
         var map1 = L.map('map1', {
-            layers: [layer1],
+            layers: [osm1,layer1],
             center: center1,
             zoom: 12
         });
+        
+        baseMaps1 = {
+            "OSM": osm1
+        };
 
+        overlay1 = {
+            "S2A":layer1
+        };
+
+        L.control.layers(baseMaps1,overlay1).addTo(map1);
+        
         //map1.attributionControl.setPrefix('');
 
         var map2 = L.map('map2', {
-            layers: [layer2],
+            layers: [osm2,layer2],
             center: center2,
             zoom: 11
         });
+
+        baseMaps2 = {
+            "OSM": osm2
+        };
+
+        overlay2 = {
+            "S2A":layer2
+        };
+
+        L.control.layers(baseMaps2,overlay2).addTo(map2);
+
 
         map1.unsync(map2);
         map2.unsync(map1);
