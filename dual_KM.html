@@ -18,7 +18,6 @@
 <body>
     <div id="map1"></div>
     <div id="map2"></div>
-    <script src="./js/L.Map.Sync.js"></script>
 
     <script type="text/javascript">
         var center1 = [31.271802,130.992565];
@@ -72,8 +71,6 @@
 
         L.control.layers(baseMaps1,overlay1).addTo(map1);
         
-        //map1.attributionControl.setPrefix('');
-
         var map2 = L.map('map2', {
             layers: [osm2,layer2],
             center: center2,
@@ -91,10 +88,6 @@
         };
 
         L.control.layers(baseMaps2,overlay2).addTo(map2);
-
-
-        map1.unsync(map2);
-        map2.unsync(map1);
 
     </script>
 </body>
